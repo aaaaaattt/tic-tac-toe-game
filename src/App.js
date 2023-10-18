@@ -21,7 +21,7 @@ function Board({xIsNext,squares,onPlay}) {
     } else {
       nextSquares[i] = "O";
     }
-    onplay(nextSquares);
+    onPlay(nextSquares);
   }
 
 
@@ -92,13 +92,31 @@ export default function Game() {
     setXIsNext(!xIsNext);
   }
 
+  function jumpTo(nextMove) {
+    // TODO
+  }
+
+  const moves = history.map((squares,move) => {
+    let description;
+    if (move > 0) {
+      description = '이동 #' + move + '로 가기';
+    } else {
+      description = '게임 시작으로 가기';
+    }
+    return (
+      <li>
+        <button onClick={()=>jumpTo(move)}>{description}</button>
+      </li>
+    )
+  })
+
   return (
     <div className="game">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{/*Todo*/}</ol>
+        <ol>{moves}</ol>
       </div>
     </div>
   );
